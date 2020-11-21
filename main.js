@@ -3,8 +3,9 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleMiner = require('role.miner');
 var roleTransporter = require('role.transporter');
-var spawn = require('spawn');
+var spawnCreeps = require('spawn');
 var buildRoad = require('build.road');
+var buildBase = require('build.base');
 
 module.exports.loop = function () {
     
@@ -15,6 +16,7 @@ module.exports.loop = function () {
         }
     }
     
+    //buildBase.buildSmallBase();
     //buildRoad.buildRoadToEnergy();
 
     //Set action type for Creeps
@@ -45,7 +47,7 @@ module.exports.loop = function () {
         }
     }
     
-    spawn.level2Spawn();
+    spawnCreeps.level2Spawn();
     
     //Automate spawning of new Creeps
     // var minNumberHarvesters = 8;

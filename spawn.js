@@ -50,13 +50,13 @@ var spawn = {
             var creepName = "Miner" + Math.floor(Math.random() * 10000);
             var sourceId = spawn.getAvailableSourceId();
             Game.spawns['Spawn1'].spawnCreep([WORK,WORK,MOVE], creepName, { memory: { role: 'miner', sourceId: sourceId } });
-        } else if (currentNumberTransporters < 5) {
+        } else if (currentNumberTransporters < 4) {
             var creepName = "Transporter" + Math.floor(Math.random() * 10000);
             Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], creepName, { memory: { role: 'transporter' } });
-        } else if (currentNumberUpgraderTransporters < 9) {
+        } else if (currentNumberUpgraderTransporters < 5) {
             var creepName = "UpgraderTransporter" + Math.floor(Math.random() * 10000);
-            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE,MOVE,MOVE,WORK], creepName, { memory: { role: 'upgraderTransporter', sourceId: upgraderTransporterSource } });
-        } else if (currentNumberBuilderTransporters < 5 {
+            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE,MOVE,WORK], creepName, { memory: { role: 'upgraderTransporter', sourceId: upgraderTransporterSource } });
+        } else if (currentNumberBuilderTransporters < 4) {
             var creepName = "BuilderTransporter" + Math.floor(Math.random() * 10000);
             Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE,MOVE,WORK], creepName, { memory: { role: 'builderTransporter' } });
         } else {
