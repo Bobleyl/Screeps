@@ -1,3 +1,4 @@
+
 var spawn = {
     starterSpawn: function() {
         var minNumberHarvesters = 3;
@@ -35,6 +36,7 @@ var spawn = {
 	level2Spawn: function() {
 	    var upgraderTransporterSource = '5bbcac3f9099fc012e635295';
 	    
+	    
         var energySourcesCount = Game.rooms['W12S13'].find(FIND_SOURCES).length;
         
         var currentNumberMinors = _(Memory.creeps).filter( { role: 'miner' } ).size();
@@ -42,6 +44,7 @@ var spawn = {
         var currentNumberUpgraders = _(Memory.creeps).filter( { role: 'upgraderTransporter' } ).size();
         var currentNumberBuilders = _(Memory.creeps).filter( { role: 'builderTransporter' } ).size();
         var currentNumberUpgraderTransporters = _(Memory.creeps).filter( { role: 'upgraderTransporter' } ).size();
+        var currentNumberBuilderTransporters = _(Memory.creeps).filter( { role: 'builderTransporter' } ).size();
         
         if (currentNumberMinors != energySourcesCount) {
             var creepName = "Miner" + Math.floor(Math.random() * 10000);
@@ -53,8 +56,11 @@ var spawn = {
         } else if (currentNumberUpgraderTransporters < 9) {
             var creepName = "UpgraderTransporter" + Math.floor(Math.random() * 10000);
             Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE,MOVE,MOVE,WORK], creepName, { memory: { role: 'upgraderTransporter', sourceId: upgraderTransporterSource } });
+        } else if (currentNumberBuilderTransporters < 5 {
+            var creepName = "BuilderTransporter" + Math.floor(Math.random() * 10000);
+            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE,MOVE,WORK], creepName, { memory: { role: 'builderTransporter' } });
         } else {
-            
+            console.log("Maxed out on Creeps!")
         }
         
         // } else if (currentNumberUpgraders < 11) {

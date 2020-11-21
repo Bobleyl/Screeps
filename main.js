@@ -4,6 +4,7 @@ var roleBuilder = require('role.builder');
 var roleMiner = require('role.miner');
 var roleTransporter = require('role.transporter');
 var spawn = require('spawn');
+var buildRoad = require('build.road');
 
 module.exports.loop = function () {
     
@@ -13,10 +14,13 @@ module.exports.loop = function () {
             delete Memory.creeps[name];
         }
     }
+    
+    //buildRoad.buildRoadToEnergy();
 
     //Set action type for Creeps
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
+        // Starter Roles
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
@@ -24,8 +28,9 @@ module.exports.loop = function () {
             roleUpgrader.run(creep);
         }
         if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
+            roleBuilder.selfHarvestingBuilder(creep);
         }
+        // Level 2 & 3 Roles
         if(creep.memory.role == 'miner') {
             roleMiner.run(creep);
         }
@@ -34,6 +39,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'upgraderTransporter'){
             roleUpgrader.runTransporter(creep);
+        }
+        if(creep.memory.role == 'builderTransporter'){
+            roleBuilder.builderHarvester(creep);
         }
     }
     
