@@ -6,6 +6,7 @@ var roleTransporter = require('role.transporter');
 var spawnCreeps = require('spawn');
 var buildRoad = require('build.road');
 var buildBase = require('build.base');
+var towerActions = require('tower');
 
 module.exports.loop = function () {
     
@@ -16,8 +17,18 @@ module.exports.loop = function () {
         }
     }
     
+    //Tower Scripts
+    var towers = Game.rooms['W12S13'].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
+    for(var tower in towers) {
+        towerActions.run(towers[tower].id);
+    }
+    //Building Scripts
+    //buildBase.buildMediumBase();
     //buildBase.buildSmallBase();
-    //buildRoad.buildRoadToEnergy();
+    //buildRoad.buildRoad(buildRoad.getPathForSpawn());
+    //var sourceId = '5bbcac3f9099fc012e635295';
+    //buildRoad.buildRoad(buildRoad.getPathForConnecting(sourceId));
+    //buildRoad.buildRoad(buildRoad.getPathForController(sourceId));
 
     //Set action type for Creeps
     for(var name in Game.creeps) {

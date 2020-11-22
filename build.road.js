@@ -14,16 +14,14 @@ var buildRoad = {
         return path;
 	},
 	
-	buildRoadToController: function(sourceId) {
-	    var path = buildRoad.getPathForController(sourceId);
-	    for (var i = 0; i < path.length; i++) {
-	        const position = new RoomPosition(path[i].x, path[i].y, 'W12S13');
-            position.createConstructionSite(STRUCTURE_ROAD);
-        }
+	getPathForConnecting: function(sourceId) {
+        var source = _.filter(Game.rooms['W12S13'].find(FIND_SOURCES), i => i.id === sourceId);
+        var spawn = Game.spawns['Spawn1'].pos;
+        const path = Game.rooms['W12S13'].findPath(source[0].pos, spawn);
+        return path;
 	},
 	
-	buildRoadToEnergy: function() {
-	    var path = buildRoad.getPathForSpawn();
+	buildRoad: function(path) {
 	    for (var i = 0; i < path.length; i++) {
 	        const position = new RoomPosition(path[i].x, path[i].y, 'W12S13');
             position.createConstructionSite(STRUCTURE_ROAD);
