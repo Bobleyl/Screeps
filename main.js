@@ -7,6 +7,7 @@ var spawnCreeps = require('spawn');
 var buildRoad = require('build.road');
 var buildBase = require('build.base');
 var towerActions = require('tower');
+var roleTowerGuy = require('role.towerGuy');
 
 module.exports.loop = function () {
     
@@ -22,13 +23,6 @@ module.exports.loop = function () {
     for(var tower in towers) {
         towerActions.run(towers[tower].id);
     }
-    //Building Scripts
-    //buildBase.buildMediumBase();
-    //buildBase.buildSmallBase();
-    //buildRoad.buildRoad(buildRoad.getPathForSpawn());
-    //var sourceId = '5bbcac3f9099fc012e635295';
-    //buildRoad.buildRoad(buildRoad.getPathForConnecting(sourceId));
-    //buildRoad.buildRoad(buildRoad.getPathForController(sourceId));
 
     //Set action type for Creeps
     for(var name in Game.creeps) {
@@ -59,36 +53,19 @@ module.exports.loop = function () {
         if(creep.memory.role == 'builderTransporter'){
             roleBuilder.builderHarvester(creep);
         }
+        if(creep.memory.role == 'towerGuy'){
+            roleTowerGuy.run(creep);
+        }
     }
     
     spawnCreeps.level2Spawn();
-    
-    //Automate spawning of new Creeps
-    // var minNumberHarvesters = 8;
-    // var maxUpgraders = 12;
-    // var currentNumberHarvesters = _(Memory.creeps).filter( { role: 'harvester' } ).size();
-    // var currentNumberUpgraders = _(Memory.creeps).filter( { role: 'upgrader' } ).size();
-    // var currentNumberBuilders = _(Memory.creeps).filter( { role: 'builder' } ).size();
-    // console.log("Current Harvestors: " + currentNumberHarvesters);
-    // console.log("Current Upgraders: " + currentNumberUpgraders);
-    // console.log("Current Builders: " + currentNumberBuilders);
-    
-    // if (currentNumberHarvesters < minNumberHarvesters) {
-    //     var creepName = "Harvester" + Math.floor(Math.random() * 100000);
-    //     Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE], creepName, { memory: { role: 'harvester' } });
-    // } else {
-    //     if (currentNumberUpgraders < maxUpgraders) {
-    //         var creepName = "Upgrader" + Math.floor(Math.random() * 100000);
-    //         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE,MOVE], creepName, { memory: { role: 'upgrader' } });
-    //     } else {
-    //         if (currentNumberBuilders < 6) {
-    //             var creepName = "Builder" + Math.floor(Math.random() * 100000);
-    //             Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE], creepName, { memory: { role: 'builder' } });
-    //         }
-    //     }
-    // }
 }
 
-/*
-Useful Commands:
-*/
+//Building Scripts
+    //buildBase.buildMediumBase();
+    //buildBase.buildSmallBase();
+    //buildRoad.buildRoad(buildRoad.getPathForSpawn());
+    //var sourceId = '5bbcac3f9099fc012e635295';
+    //buildRoad.buildRoad(buildRoad.getPathForConnecting(sourceId));
+    //buildRoad.buildRoad(buildRoad.getPathForController(sourceId));
+    
